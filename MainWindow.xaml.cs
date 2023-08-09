@@ -145,48 +145,48 @@ namespace ProyectRuiz_Grafo
 
         public List<int> DijkstraCaminoCorto(Grafo grafo, int VerticeInicio, int VerticeFinal)
         {
-            Dictionary<int, int> distance = new Dictionary<int, int>();
-            Dictionary<int, int> previous = new Dictionary<int, int>();
+            Dictionary<int, int> distancia = new Dictionary<int, int>();
+            Dictionary<int, int> Anterior = new Dictionary<int, int>();
             List<int> unvisitedVertices = new List<int>();
 
-            foreach (var vertexData in grafo.ListaAdjacencia.Values)
+            foreach (var Dvertices in grafo.ListaAdjacencia.Values)
             {
-                Vertice vertice = vertexData[0].Item1;
-                distance[vertice.Id] = int.MaxValue;
-                previous[vertice.Id] = -1;
+                Vertice vertice = Dvertices[0].Item1;
+                distancia[vertice.Id] = int.MaxValue;
+                Anterior[vertice.Id] = -1;
                 unvisitedVertices.Add(vertice.Id);
             }
 
-            distance[VerticeInicio] = 0;
+            distancia[VerticeInicio] = 0;
 
             int sum = 0;
             while (unvisitedVertices.Count > 0)
             {
-                int currentVertexId = unvisitedVertices.OrderBy(v => distance[v]).First();
+                int currentVertexId = unvisitedVertices.OrderBy(v => distancia[v]).First();
                 unvisitedVertices.Remove(currentVertexId);
 
-                if (distance[currentVertexId] == int.MaxValue)
+                if (distancia[currentVertexId] == int.MaxValue)
                 {
                     break;
                 }
 
                 foreach (var (vecino, peso) in grafo.ListaAdjacencia[currentVertexId].Skip(1))
                 {
-                    int altDistance = distance[currentVertexId] + peso;
-                    if (altDistance < distance[vecino.Id])
+                    int altDistance = distancia[currentVertexId] + peso;
+                    if (altDistance < distancia[vecino.Id])
                     {
-                        distance[vecino.Id] = altDistance;
-                        previous[vecino.Id] = currentVertexId;
+                        distancia[vecino.Id] = altDistance;
+                        Anterior[vecino.Id] = currentVertexId;
                         sum += peso;
                     }
                 }
             }
             List<int> caminocorto = new List<int>();
-            int vertexAt = VerticeFinal;
-            while (vertexAt != -1)
+            int verticeAt = VerticeFinal;
+            while (verticeAt != -1)
             {
-                caminocorto.Insert(0, vertexAt);
-                vertexAt = previous[vertexAt];
+                caminocorto.Insert(0, verticeAt);
+                verticeAt = Anterior[verticeAt];
             }
             totalLabel.Text = sum.ToString();
             return caminocorto;
