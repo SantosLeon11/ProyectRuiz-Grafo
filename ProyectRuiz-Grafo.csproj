@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>ProyectRuiz_Grafo</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="552397.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="552397.jpg" />
+  </ItemGroup>
+
+</Project>
